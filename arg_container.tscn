@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdphuxi8wp1pp"]
+
+[ext_resource type="Script" uid="uid://b6ubfdrv7q0dp" path="res://arg_container.gd" id="1_8vtgb"]
+[ext_resource type="Texture2D" uid="uid://bdymm8vokg8f6" path="res://pngegg.png" id="2_ya01u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ya01u"]
+font_size = 26
+
+[node name="ArgContainer" type="Node2D"]
+script = ExtResource("1_8vtgb")
+
+[node name="ArgLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.379
+anchor_top = 0.38
+anchor_right = 0.62
+anchor_bottom = 0.62
+offset_left = -187.424
+offset_top = -96.0
+offset_right = 187.576
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+text = "dfjsdjkfsdjkfhsdjkfhjdskhfjkds
+
+
+
+fsdfsdfds"
+label_settings = SubResource("LabelSettings_ya01u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ArgLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+texture = ExtResource("2_ya01u")
+region_rect = Rect2(0.335335, 87.5543, 510.665, 336.946)
+patch_margin_left = 97
+patch_margin_top = 100
+patch_margin_right = 98
+patch_margin_bottom = 100
+
+[node name="TextEdit" type="TextEdit" parent="ArgLabel"]
+visible = false
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 26
+text = "dfjsdjkfsdjkfhsdjkfhjdskhfjkds
+
+
+
+fsdfsdfds"
+autowrap_mode = 0
+
+[connection signal="gui_input" from="ArgLabel/NinePatchRect" to="." method="_gui_input"]

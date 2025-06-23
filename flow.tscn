@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq0obf0w682td"]
+
+[ext_resource type="PackedScene" uid="uid://bdphuxi8wp1pp" path="res://arg_container.tscn" id="1_tpllk"]
+[ext_resource type="Resource" uid="uid://cxgx7xlee3i3i" path="res://example_argument.tres" id="2_af01q"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ArgContainer" parent="." instance=ExtResource("1_tpllk")]
+position = Vector2(218, 146)
+arg = ExtResource("2_af01q")
+
+[node name="ArgContainer2" parent="." instance=ExtResource("1_tpllk")]
+position = Vector2(161, 483)
+arg = ExtResource("2_af01q")
+
+[node name="ArgContainer3" parent="." instance=ExtResource("1_tpllk")]
+position = Vector2(563, 383)
+arg = ExtResource("2_af01q")

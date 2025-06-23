@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Arg" load_steps=2 format=3 uid="uid://cxgx7xlee3i3i"]
+
+[ext_resource type="Script" uid="uid://g0oidknnol5o" path="res://arg.gd" id="1_me2ue"]
+
+[resource]
+script = ExtResource("1_me2ue")
+preview_text = "uh i think climate change isnt real"
+metadata/_custom_type_script = "uid://g0oidknnol5o"
