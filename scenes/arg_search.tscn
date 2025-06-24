@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://trodj3t60tvc"]
+
+[ext_resource type="Script" uid="uid://3h808b0lj57h" path="res://scripts/arg_search.gd" id="1_770r3"]
+[ext_resource type="Texture2D" uid="uid://d06k374atsh67" path="res://resources/check-mark-button-svgrepo-com.svg" id="2_1vrse"]
+[ext_resource type="Script" uid="uid://bs7r4uyp6gtyo" path="res://scenes/search_box.gd" id="2_4i3v7"]
+[ext_resource type="Script" uid="uid://clysbksu6q0eh" path="res://scripts/search_result.gd" id="3_1vrse"]
+[ext_resource type="Resource" uid="uid://cpo33y4ap6168" path="res://card_test_example.tres" id="4_be8ga"]
+[ext_resource type="Script" uid="uid://dx6yt4gym68yy" path="res://scripts/card_arg.gd" id="5_84t3x"]
+[ext_resource type="Resource" uid="uid://cxgx7xlee3i3i" path="res://example_argument.tres" id="6_4i3v7"]
+
+[sub_resource type="Resource" id="Resource_xgokf"]
+script = ExtResource("5_84t3x")
+commend = "this is a carddsadasdas"
+preview_text = "impact moment"
+metadata/_custom_type_script = "uid://dx6yt4gym68yy"
+
+[node name="ArgSearch" type="Panel"]
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 0.2
+anchor_bottom = 0.7
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_770r3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.40001
+offset_bottom = -7.20001
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Searchbox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_4i3v7")
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/Searchbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Create/Search Args"
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="InsertButton" type="Button" parent="VBoxContainer/Searchbox"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_1vrse")
+
+[node name="SearchResult" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_1vrse")
+arg = ExtResource("4_be8ga")
+
+[node name="Label" type="Label" parent="VBoxContainer/SearchResult"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hello this is the content of the card"
+text_overrun_behavior = 3
+
+[node name="SearchResult2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_1vrse")
+arg = SubResource("Resource_xgokf")
+
+[node name="Label" type="Label" parent="VBoxContainer/SearchResult2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hello this is the content of the card"
+text_overrun_behavior = 3
+
+[node name="SearchResult3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_1vrse")
+arg = ExtResource("6_4i3v7")
+
+[node name="Label" type="Label" parent="VBoxContainer/SearchResult3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hello this is the content of the card"
+text_overrun_behavior = 3
+
+[connection signal="pressed" from="VBoxContainer/Searchbox/InsertButton" to="." method="_insert_button_pressed"]

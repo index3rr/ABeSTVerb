@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardArg" load_steps=2 format=3 uid="uid://cpo33y4ap6168"]
+
+[ext_resource type="Script" uid="uid://dx6yt4gym68yy" path="res://scripts/card_arg.gd" id="1_jju0m"]
+
+[resource]
+script = ExtResource("1_jju0m")
+commend = "this is a card"
+preview_text = "this is an analytical argument"
+metadata/_custom_type_script = "uid://dx6yt4gym68yy"

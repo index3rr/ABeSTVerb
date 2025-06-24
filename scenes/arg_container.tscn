@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdphuxi8wp1pp"]
 
-[ext_resource type="Script" uid="uid://b6ubfdrv7q0dp" path="res://arg_container.gd" id="1_8vtgb"]
-[ext_resource type="Texture2D" uid="uid://bdymm8vokg8f6" path="res://pngegg.png" id="2_ya01u"]
+[ext_resource type="Script" uid="uid://b6ubfdrv7q0dp" path="res://scripts/arg_container.gd" id="1_i3ibf"]
+[ext_resource type="Texture2D" uid="uid://bdymm8vokg8f6" path="res://resources/pngegg.png" id="2_p2d1m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ya01u"]
 font_size = 26
 
-[node name="ArgContainer" type="Node2D"]
-script = ExtResource("1_8vtgb")
+[node name="ArgContainer" type="Node2D" groups=["arg_container"]]
+script = ExtResource("1_i3ibf")
 
 [node name="ArgLabel" type="Label" parent="."]
 anchors_preset = -1
@@ -45,7 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 1
-texture = ExtResource("2_ya01u")
+texture = ExtResource("2_p2d1m")
 region_rect = Rect2(0.335335, 87.5543, 510.665, 336.946)
 patch_margin_left = 97
 patch_margin_top = 100
