@@ -6,19 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://trodj3t60tvc" path="res://scenes/arg_search.tscn" id="4_c76if"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(2, 0)
 script = ExtResource("1_af01q")
 
 [node name="ArgContainer" parent="." instance=ExtResource("1_tpllk")]
-position = Vector2(-1049.08, 4406.34)
+position = Vector2(-184, 403)
 arg = ExtResource("2_af01q")
 
 [node name="ArgContainer2" parent="." instance=ExtResource("1_tpllk")]
-position = Vector2(-156.148, 4578.93)
+position = Vector2(218, 397)
 arg = ExtResource("2_af01q")
 
 [node name="ArgContainer3" parent="." instance=ExtResource("1_tpllk")]
-position = Vector2(600.4, 383)
+position = Vector2(850, 373)
 arg = ExtResource("2_af01q")
 
 [node name="Camera2D" type="Camera2D" parent="."]

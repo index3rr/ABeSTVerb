@@ -1,33 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdphuxi8wp1pp"]
+[gd_scene load_steps=5 format=3 uid="uid://bdphuxi8wp1pp"]
 
 [ext_resource type="Script" uid="uid://b6ubfdrv7q0dp" path="res://scripts/arg_container.gd" id="1_i3ibf"]
 [ext_resource type="Texture2D" uid="uid://bdymm8vokg8f6" path="res://resources/pngegg.png" id="2_p2d1m"]
+[ext_resource type="Script" uid="uid://bhqgp6e7u0mo0" path="res://scripts/connection_renderer.gd" id="3_p2d1m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ya01u"]
-font_size = 26
+font_size = 37
 
-[node name="ArgContainer" type="Node2D" groups=["arg_container"]]
+[node name="ArgContainer" type="Node2D" node_paths=PackedStringArray("connection_renderer", "port") groups=["arg_container"]]
 script = ExtResource("1_i3ibf")
+connection_renderer = NodePath("ArgLabel/ConnectionPositioning/ConnectionRenderer")
+port = NodePath("ArgLabel/Port")
 
 [node name="ArgLabel" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.379
-anchor_top = 0.38
-anchor_right = 0.62
-anchor_bottom = 0.62
-offset_left = -187.424
-offset_top = -96.0
-offset_right = 187.576
-offset_bottom = 96.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
-text = "dfjsdjkfsdjkfhsdjkfhjdskhfjkds
-
-
-
-fsdfsdfds"
+text = "Empty Arg! 
+Reportfdfssdssssssssssssssssdsadas"
 label_settings = SubResource("LabelSettings_ya01u")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -37,10 +33,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -48.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = -30.0
+offset_top = -26.0
+offset_right = 31.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
@@ -51,6 +47,7 @@ patch_margin_left = 97
 patch_margin_top = 100
 patch_margin_right = 98
 patch_margin_bottom = 100
+metadata/_edit_use_anchors_ = true
 
 [node name="TextEdit" type="TextEdit" parent="ArgLabel"]
 visible = false
@@ -66,10 +63,30 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 26
 text = "dfjsdjkfsdjkfhsdjkfhjdskhfjkds
-
+sdas
+sdasda
 
 
 fsdfsdfds"
 autowrap_mode = 0
+
+[node name="ConnectionPositioning" type="Control" parent="ArgLabel"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ConnectionRenderer" type="Node2D" parent="ArgLabel/ConnectionPositioning"]
+script = ExtResource("3_p2d1m")
+
+[node name="Port" type="Control" parent="ArgLabel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
 
 [connection signal="gui_input" from="ArgLabel/NinePatchRect" to="." method="_gui_input"]

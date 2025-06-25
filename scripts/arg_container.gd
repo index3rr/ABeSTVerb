@@ -1,15 +1,28 @@
 extends Node2D
+class_name ArgContainer
 
-@export var arg:Arg
-@export var connections:Array
+@export var connection_renderer: Node2D
+@export var port: Control
+@onready var nine_patch_rect: NinePatchRect = $ArgLabel/NinePatchRect
+
+@export var arg:Arg:
+	set(value):
+		arg = value
+		$ArgLabel.text = arg.preview_text
+@export var connections:Array[Node2D]:
+	set(value):
+		connections = value
+		_update_renderer()
 
 var draggingOffset
 var current_column = 0
 var separation_speed = 5.0
 var separation_force = Vector2.ZERO
 
+const COLUMN_SIZE = 600
+
 func calculate_column() -> int:
-	return int(round(global_position.x / 200))
+	return int(round(global_position.x / COLUMN_SIZE))
 
 func get_bounds() -> Rect2:
 	var np:NinePatchRect = $ArgLabel/NinePatchRect
@@ -31,8 +44,8 @@ func check_overlap(other: Node2D) -> float:
 
 # Calculate the target column position
 func calculate_column_target() -> float:
-	var rem = int(round(global_position.x)) % 200
-	return global_position.x + (200 - rem if rem > 100 else -rem)
+	var rem = int(round(global_position.x)) % COLUMN_SIZE
+	return global_position.x + (COLUMN_SIZE - rem if rem > COLUMN_SIZE/2 else -rem)
 
 # Handle column snapping
 func snap_to_column() -> void:
@@ -48,7 +61,7 @@ func handle_dragging() -> void:
 	var drag_target = mouse_pos - draggingOffset
 	
 	# Calculate column target based on drag position
-	var target = drag_target.x + (200 - int(round(drag_target.x)) % 200 if int(round(drag_target.x)) % 200 > 100 else -int(round(drag_target.x)) % 200)
+	var target = drag_target.x + (COLUMN_SIZE - int(round(drag_target.x)) % COLUMN_SIZE if int(round(drag_target.x)) % COLUMN_SIZE > COLUMN_SIZE/2 else -int(round(drag_target.x)) % COLUMN_SIZE)
 	
 	# Draw debug visuals
 	DebugDraw2D.circle(Vector2(target,global_position.y))
@@ -81,7 +94,11 @@ func handle_vertical_separation(delta: float) -> void:
 	if vertical_separation != 0.0:
 		global_position.y += vertical_separation * separation_speed * delta
 
+func _update_renderer():
+	connection_renderer.update_connections(connections)
+
 func _ready() -> void:
+	_update_renderer()
 	pass
 
 func _process(delta: float) -> void:
@@ -91,12 +108,12 @@ func _process(delta: float) -> void:
 	# Handle vertical separation when not dragging
 	if not draggingOffset:
 		handle_vertical_separation(delta)
-	
 	# Handle column snapping or dragging
-	if not draggingOffset:
 		snap_to_column()
 	else:
 		handle_dragging()
+		
+	connection_renderer.queue_redraw()
 
 func _input(event: InputEvent) -> void:
 	
@@ -104,10 +121,22 @@ func _input(event: InputEvent) -> void:
 	if draggingOffset and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		draggingOffset = null
 
+func begin_drag():
+	draggingOffset = get_global_mouse_position() - global_position
+	DebugDraw2D.arrow(get_global_mouse_position(), global_position)
+
 func _gui_input(event:InputEvent) -> void:
-	print(event.get_class())
-	if event is InputEventMouseMotion and Input.is_action_pressed("drag") and not draggingOffset:
-		draggingOffset = get_global_mouse_position() - global_position
-		DebugDraw2D.arrow(get_global_mouse_position(), global_position)
+	if event is InputEventMouseButton and Input.is_action_just_pressed("drag") and not draggingOffset:
+		event = event as InputEventMouseButton
+		if event.position.x > 0.8 * $ArgLabel/NinePatchRect.size.x:
+			#handle creation of new arg connected to this one
+			var inst = preload("uid://bdphuxi8wp1pp").instantiate()
+			inst.global_position = get_global_mouse_position()
+			inst.arg = Arg.new("dragging arg test")
+			add_sibling(inst)
+			connections += [inst]
+			inst.begin_drag()
+		else:
+			begin_drag()
 	if event is InputEventMouseButton and event.double_click and event.button_index == 0:
 		pass
